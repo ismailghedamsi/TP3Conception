@@ -8,7 +8,7 @@ import cal.java03.tp3.service.ServiceDao;
 public class ActionSymbols {
 	private static List<String> listeSymboles;
 
-	public ActionSymbols() {
+	public ActionSymbols() throws Exception {
 		super();
 		ActionSymbols.listeSymboles = ServiceDao.fillListActionFromFile("./Symboles_Actions.Canada.txt");
 	}

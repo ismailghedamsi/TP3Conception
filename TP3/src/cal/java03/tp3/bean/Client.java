@@ -77,7 +77,7 @@ public class Client implements IOperation {
 
 
 	// Action et Client
-	public void acheterAction(String symboleAction, BigDecimal nbActions) {
+	public void acheterAction(String symboleAction, BigDecimal nbActions) throws Exception {
 		Stock stock = null;
 		BigDecimal prixAction = null;
 		Action action = null;

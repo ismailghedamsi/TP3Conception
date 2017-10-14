@@ -3,6 +3,8 @@ package cal.java03.tp3.service;
 import java.io.*;
 import java.util.*;
 
+import org.apache.commons.io.FileUtils;
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
@@ -10,21 +12,12 @@ import cal.java03.tp3.bean.Action;
 import cal.java03.tp3.bean.Client;
 import cal.java03.tp3.bean.ClientParticulier;
 import cal.java03.tp3.bean.Portefeuille;
-
+import org.apache.commons.io.FileUtils;
 public class ServiceDao {
 	
-	public static List<String> fillListActionFromFile(String pathName) {
-		String symbol;
-		List<String> actionSymboles = new ArrayList<String>();
-		try {
-			BufferedReader br = new BufferedReader(new FileReader(new File(pathName)));
-			while((symbol = br.readLine()) != null) {
-				actionSymboles.add(symbol);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return actionSymboles;
+	public static List<String> fillListActionFromFile(String pathName) throws IOException {
+		
+		return FileUtils.readLines(new File("./Symboles_Actions.Canada.txt"),"UTF-8");
 	}
 	
 	public static void addActionToActionCollection(List<Action> collection,Action action) {

@@ -10,7 +10,7 @@ import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 
 public class Test {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		ClientParticulier c = new ClientParticulier("active", "ismailghedamsi@gmail.com", "ismail", "Ghedamsi");
 		ClientEntreprise ce = new ClientEntreprise("active", "sony@gmail.com", "Sony", "52", 20);
 		try {
