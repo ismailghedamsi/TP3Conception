@@ -94,6 +94,4 @@ public class Portefeuille {
 		return idClient;
 	}
 	
-	
-	
 }

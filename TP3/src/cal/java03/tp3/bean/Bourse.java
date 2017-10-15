@@ -1,31 +1,67 @@
 package cal.java03.tp3.bean;
 
+import java.io.IOException;
 import java.util.*;
 
 import cal.java03.tp3.service.ServiceDao;
 
 public class Bourse {
-	private   List<String> ListSymboleActionNational;
-	private   List<String> ListSymboleActionInterational;
+	private  static List<String> ListSymboleActionNational;
+	private   static List<String> ListSymboleActionInterational;
 	private  List<Client> listeClient;
-	private  int caisse;
+	private static Map<String,Client> mapClientActive;
+	private static Map<String,Client> mapClientInative;
+	private static float caisse;
+	
+	//instanciation statique
+	static {
+		mapClientActive = new HashMap<>();
+		mapClientInative = new HashMap<>();
+		try {
+			ListSymboleActionNational = ServiceDao.fillListActionFromFile("./Symboles_Actions.Canada.txt");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
+		try {
+			ListSymboleActionInterational = ServiceDao.fillListActionFromFile("./Symboles_Actions_Internationnales");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static Map<String, Client> getMapClientActive() {
+		return mapClientActive;
+	}
+	public static void setMapClientActive(Map<String, Client> mapClientActive) {
+		Bourse.mapClientActive = mapClientActive;
+	}
+	public static Map<String, Client> getMapClientInative() {
+		return mapClientInative;
+	}
+	public static void setMapClientInative(Map<String, Client> mapClientInative) {
+		Bourse.mapClientInative = mapClientInative;
+	}
 	public Bourse() throws Exception {
 		super();
 		ListSymboleActionNational = ServiceDao.fillListActionFromFile("./Symboles_Actions.Canada.txt");;
 		ListSymboleActionInterational = ServiceDao.fillListActionFromFile("./Symboles_Actions_Internationnales");
 		this.listeClient = new ArrayList<Client>();
-		this.caisse = 0;
+		caisse = 0;
 	}
-	public  List<String> getListSymboleActionNational() {
+
+	
+	public static List<String> getListSymboleActionNational() {
 		return ListSymboleActionNational;
 	}
-	public  void setListSymboleActionNational(List<String> listSymboleActionNational) {
+	public static void setListSymboleActionNational(List<String> listSymboleActionNational) {
 		ListSymboleActionNational = listSymboleActionNational;
 	}
-	public  List<String> getListSymboleActionInterational() {
+	public static List<String> getListSymboleActionInterational() {
 		return ListSymboleActionInterational;
 	}
-	public  void setListSymboleActionInterational(List<String> listSymboleActionInterational) {
+	public static void setListSymboleActionInterational(List<String> listSymboleActionInterational) {
 		ListSymboleActionInterational = listSymboleActionInterational;
 	}
 	public List<Client> getListeClient() {
@@ -34,12 +70,13 @@ public class Bourse {
 	public void setListeClient(List<Client> listeClient) {
 		this.listeClient = listeClient;
 	}
-	public int getCaisse() {
+	public static float getCaisse() {
 		return caisse;
 	}
-	public void setCaisse(int caisse) {
-		this.caisse = caisse;
+	public static void setCaisse(float caisse) {
+		Bourse.caisse = caisse;
 	}
+
 	
 	
 	

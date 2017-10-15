@@ -2,6 +2,9 @@ package cal.java03.tp3.bean;
 
 import java.util.*;
 
+import cal.java03.tp3.service.ServiceDao;
+import cal.java03.tp3.service.ServiceOperations;
+
 /**
  * Classe mere des clients particuliers et entreprise
  * @author small44
@@ -10,7 +13,7 @@ import java.util.*;
 public class Client  {
 	private static int compteur;
 	private int idClient;
-	private Collection<Action> listeAction;
+	private List<Action> listeAction;
 	private String etatCompte;
 	private String email;
 	private Portefeuille compte;
@@ -23,9 +26,10 @@ public class Client  {
 		super();
 		this.listeAction = new ArrayList<Action>();
 		// Creation d'un compte pour chaque nouveau client
-		this.compte = new Portefeuille(this.idClient,"national",500000000);
+		 this.compte = ServiceOperations.ouvrirPortefeuille(this.idClient,"national",500000000);
 		this.etatCompte = "active";
 		this.email = email;
+		ServiceDao.addClientToMap(Bourse.getMapClientActive(),this);
 		this.idClient = compteur;
 		compteur++;
 	}
@@ -35,7 +39,7 @@ public class Client  {
 	 * 
 	 * @return la liste des actions d'un client
 	 */
-	public Collection<Action> getListeAction() {
+	public List<Action> getListeAction() {
 		return listeAction;
 	}
 
@@ -44,7 +48,7 @@ public class Client  {
 	 * Modificateur de la liste des actions
 	 * @param listeAction
 	 */
-	public void setListeAction(Collection<Action> listeAction) {
+	public void setListeAction(List<Action> listeAction) {
 		this.listeAction = listeAction;
 	}
 
@@ -102,6 +106,4 @@ public class Client  {
 		this.compte = compte;
 	}
 
-
-	
 }

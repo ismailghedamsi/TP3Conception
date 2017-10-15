@@ -1,7 +1,6 @@
 package cal.java03.tp3.bean;
 
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.List;
 
 import yahoofinance.histquotes.HistoricalQuote;
@@ -105,41 +104,22 @@ public class Action {
 
 
 
-	public Collection getCollectionHistorique() {
+
+	public List<HistoricalQuote> getCollectionHistorique() {
 		return collectionHistorique;
 	}
 
-
-
-
-
-
-	public void setCollectionHistorique(List collectionHistorique) {
+	public void setCollectionHistorique(List<HistoricalQuote> collectionHistorique) {
 		this.collectionHistorique = collectionHistorique;
 	}
 
-
-
-
-
-
-	public List getCollectionDividente() {
+	public List<HistoricalDividend> getCollectionDividente() {
 		return collectionDividente;
 	}
 
-
-
-
-
-
-	public void setCollectionDividente(List collectionDividente) {
+	public void setCollectionDividente(List<HistoricalDividend> collectionDividente) {
 		this.collectionDividente = collectionDividente;
 	}
-
-
-
-
-
 
 	public float getValeurChange() {
 		return valeurChange;

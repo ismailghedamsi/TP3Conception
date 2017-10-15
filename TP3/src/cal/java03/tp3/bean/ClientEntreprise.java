@@ -1,7 +1,6 @@
 package cal.java03.tp3.bean;
 
-
-
+import cal.java03.tp3.service.ServiceDao;
 
 /**
  * Classe representant un actionnaire de type Entreprise

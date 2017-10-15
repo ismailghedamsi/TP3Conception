@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 
@@ -37,8 +38,8 @@ public class ServiceDao {
 	 * @param bourse
 	 * @param client
 	 */
-	public static void addClientToBourse(Bourse bourse,Client client) {
-		bourse.getListeClient().add(client);
+	public static void addClientToMap(Map<String,Client> mapClient,Client client) {
+		mapClient.put(client.getEmail(), client);
 	}
 	
 	/**
@@ -46,20 +47,45 @@ public class ServiceDao {
 	 * @param bourse
 	 * @param client
 	 */
-	public static void deleteClientToBourse(Bourse bourse,Client client) {
-		bourse.getListeClient().add(client);
+	public static void deleteClientFromMap(Map<String,Client> mapClient,Client client) {
+		mapClient.remove(client.getEmail());
+	}
+	
+	/**
+	 * Implementation du R du C.R.U.D
+	 * @param bourse
+	 * @param client
+	 */
+	public static void MapContainsClient(Map<String,Client> mapClient,Client client) {
+		mapClient.remove(client.getEmail());
 	}
 	
 	
+	public static void addActionToActionList(List<Action> liste,Action action) {
+		liste.add(action);
+	}
 	
-	public static void addActionToActionCollection(List<Action> collection,Action action) {
-		collection.add(action);
+	public static void removeActionFromActionList(List<Action> liste,Action action) {
+		liste.add(action);
+	}
+	
+	
+	public static boolean actionListContainsAction(List<Action> liste,Action action) {
+		return liste.contains(action);
 	}
 	
 	public static void addClientToBourse(List<Client> listeClientBourse,Client client) {
 		listeClientBourse.add(client);
 	}
 	
+
+	
+	/**
+	 * Generer un fichier xml avec la librarie Java io 
+	 * @param fileName
+	 * @param client
+	 * @return
+	 */
 	public static boolean saveXml(String fileName, Client client) {
 
 		try {
