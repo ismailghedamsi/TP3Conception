@@ -5,4 +5,11 @@
   <idClientParticulier>1</idClientParticulier>
   <nom>ismail</nom>
   <prenom>Ghedamsi</prenom>
+</ClientParticulier><ClientParticulier>
+  <idClient>0</idClient>
+  <listeAction class="list"/>
+  <etatCompte>active</etatCompte>
+  <idClientParticulier>1</idClientParticulier>
+  <nom>ismail</nom>
+  <prenom>Ghedamsi</prenom>
 </ClientParticulier>

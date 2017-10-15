@@ -4,7 +4,6 @@ package cal.java03.tp3.service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -12,9 +11,8 @@ import org.apache.commons.io.FileUtils;
 import com.thoughtworks.xstream.*;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-import cal.java03.tp3.bean.Action;
-import cal.java03.tp3.bean.Client;
-import cal.java03.tp3.bean.ClientParticulier;
+import cal.java03.tp3.bean.*;
+
 
 /**
  * 
@@ -23,10 +21,36 @@ import cal.java03.tp3.bean.ClientParticulier;
  */
 public class ServiceDao {
 	
+	/**
+	 * Methode pour importer la liste des symboles des action
+	 * @param pathName
+	 * @return
+	 * @throws IOException
+	 */
 	public static List<String> fillListActionFromFile(String pathName) throws IOException {
 		
 		return FileUtils.readLines(new File("./Symboles_Actions.Canada.txt"),"UTF-8");
 	}
+	
+	/**
+	 * Implementation du C du C.R.U.D
+	 * @param bourse
+	 * @param client
+	 */
+	public static void addClientToBourse(Bourse bourse,Client client) {
+		bourse.getListeClient().add(client);
+	}
+	
+	/**
+	 * Implementation du D du C.R.U.D
+	 * @param bourse
+	 * @param client
+	 */
+	public static void deleteClientToBourse(Bourse bourse,Client client) {
+		bourse.getListeClient().add(client);
+	}
+	
+	
 	
 	public static void addActionToActionCollection(List<Action> collection,Action action) {
 		collection.add(action);

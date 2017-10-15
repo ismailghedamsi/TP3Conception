@@ -1,18 +1,24 @@
 package cal.java03.tp3.bean;
 
-import java.io.IOException;
-import java.math.BigDecimal;
 
-import cal.java03.tp3.service.ServiceDao;
-import yahoofinance.Stock;
-import yahoofinance.YahooFinance;
-
-public class ClientParticulier extends Client /*implements IOperation*/{
+/**
+ * Actionnaire particulier
+ * @author small44
+ *
+ */
+public class ClientParticulier extends Client{
 	private static int compteur=1;
 	private  int idClientParticulier;
 	private String nom;
 	private String prenom;
 
+	/**
+	 * Constructeur d'un client particulier avec un compte par defaut
+	 * @param etatCompte
+	 * @param email
+	 * @param nom
+	 * @param prenom
+	 */
 	public ClientParticulier(String etatCompte,String email,String nom, String prenom) {
 		super(email);
 		this.idClientParticulier = compteur;
@@ -22,112 +28,66 @@ public class ClientParticulier extends Client /*implements IOperation*/{
 	
 	}
 	
-	
 
+	/**
+	 * 
+	 * @return l'id du client
+	 */
 	public int getIdClientParticulier() {
 		return idClientParticulier;
 	}
 
-
-
-	public void setIdClientParticulier(int idClientParticulier) {
-		this.idClientParticulier = idClientParticulier;
-	}
-
-
-
+  /**
+   * 
+   * @return le nom du client
+   */
 	public String getNom() {
 		return nom;
 	}
 
 
-
+	/**
+	 * Modificateur du nom du client
+	 * @param nom
+	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
 
-
+	/**
+	 * 
+	 * @return le prenom du client
+	 */
 	public String getPrenom() {
 		return prenom;
 	}
 
 
-
+	/**
+	 * Modificateur du prenom du client
+	 * @param prenom
+	 */
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
 
 
-
+	/**
+	 * @return le compte du client
+	 */
 	public Portefeuille getCompte() {
 		return super.getCompte();
 	}
 
 
-
+	/**
+	 * Modificateur du compte
+	 * @param compte
+	 */
 	public void setCompte(Portefeuille compte) {
 		super.setCompte(compte);
 	}
 
-
-
-/*	@Override
-	public void vendreAction() {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void fermerPortefeuille() {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void ouvrirPortefeuille() {
-		// TODO Auto-generated method stub
-		
-	}*/
-
-	//@Override
-/*	public void acheterAction(String symboleAction, BigDecimal nbActions) {
-		Stock stock = null;
-		BigDecimal prixAction = null;
-		Action action = null;
-		float valeurTransactionTotal = 0;
-		//Verifier que le symbole de l'action estValide
-		ActionSymbols as = new ActionSymbols(); 
-		if(as.getListeSymboles().contains(symboleAction)){
-			try {
-				stock = YahooFinance.get(symboleAction);
-				System.out.println(stock.getName());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			//Verifier si le compte est active et le client a l'argent necesaire pour
-			//acheter un ensemble d'action 
-		     valeurTransactionTotal = stock.getQuote().getPrice().multiply(nbActions).intValue();
-			if(this.etatCompte.equals("active") && 
-					valeurTransactionTotal<this.compte.getArgentInvesti()) {
-				prixAction = stock.getQuote().getPrice();
-				try {
-					action = new Action(symboleAction, stock.getName(), prixAction, stock.getHistory(), stock.getDividendHistory(), stock.getQuote().getChange().floatValue(), stock.getQuote().getVolume());
-					System.out.println("action" + action);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				ServiceDao.addActionToActionCollection(this.getCompte().getListeAction(), action);
-	
-			}
-		}
-		if(valeurTransactionTotal > 10_000) {
-			ServiceDao.saveXml("./incidents.xml", this);
-		}
-		
-	}*/
-	
-	
-	
-	
 
 }
