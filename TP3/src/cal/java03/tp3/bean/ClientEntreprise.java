@@ -2,7 +2,7 @@ package cal.java03.tp3.bean;
 
 
 
-import cal.java03.tp3.util.IOperation;
+
 
 public class ClientEntreprise extends Client {
 	private static int compteur;

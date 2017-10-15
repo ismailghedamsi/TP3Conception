@@ -1,18 +1,26 @@
 package cal.java03.tp3.service;
 
-import java.io.*;
-import java.util.*;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
-import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.*;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import cal.java03.tp3.bean.Action;
 import cal.java03.tp3.bean.Client;
 import cal.java03.tp3.bean.ClientParticulier;
-import cal.java03.tp3.bean.Portefeuille;
-import org.apache.commons.io.FileUtils;
+
+/**
+ * 
+ * @author small44
+ * Classe de service qui implemente le C.R.U.D
+ */
 public class ServiceDao {
 	
 	public static List<String> fillListActionFromFile(String pathName) throws IOException {
@@ -24,17 +32,26 @@ public class ServiceDao {
 		collection.add(action);
 	}
 	
+	public static void addClientToBourse(List<Client> listeClientBourse,Client client) {
+		listeClientBourse.add(client);
+	}
+	
 	public static boolean saveXml(String fileName, Client client) {
 
 		try {
 
 			XStream stream = new XStream(new DomDriver());
-			stream.alias("Client", Client.class);
+			
 			// Seulement sauvegarder les champs id,liste transaction et le total es transaction
-			stream.omitField(Client.class, "nom");
-			stream.omitField(Client.class, "prenom");
-			stream.omitField(Client.class, "compte");
-			stream.omitField(Client.class, "email");
+			if(client instanceof ClientParticulier) {
+				stream.alias("Client", Client.class);
+				stream.alias("ClientParticulier", ClientParticulier.class);
+				stream.omitField(Client.class, "nom");
+				stream.omitField(Client.class, "prenom");
+				stream.omitField(Client.class, "compte");
+				stream.omitField(Client.class, "email");
+			}
+		
 			stream.toXML(client, new FileOutputStream(fileName,true));
 
 			return new File(fileName).exists();
@@ -44,6 +61,10 @@ public class ServiceDao {
 		}
 		return false;
 	}
+	
+
+
+		
 	
 	
 }

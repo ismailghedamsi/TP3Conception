@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 import cal.java03.tp3.service.ServiceDao;
-import cal.java03.tp3.util.IOperation;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 
