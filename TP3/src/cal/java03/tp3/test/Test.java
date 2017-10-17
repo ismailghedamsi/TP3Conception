@@ -2,6 +2,7 @@ package cal.java03.tp3.test;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Date;
 
 import cal.java03.tp3.bean.Bourse;
 import cal.java03.tp3.bean.Client;
@@ -29,4 +30,5 @@ public class Test {
 			e.printStackTrace();
 		}
 	}
+	
 }

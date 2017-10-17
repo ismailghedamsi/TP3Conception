@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.*;
 
 import cal.java03.tp3.service.ServiceDao;
+import cal.java03.tp3.util.IConstant;
 
 public class Bourse {
 	private  static List<String> ListSymboleActionNational;
@@ -18,13 +19,13 @@ public class Bourse {
 		mapClientActive = new HashMap<>();
 		mapClientInative = new HashMap<>();
 		try {
-			ListSymboleActionNational = ServiceDao.fillListActionFromFile("./Symboles_Actions.Canada.txt");
+			ListSymboleActionNational = ServiceDao.fillListActionFromFile(IConstant.ACTIONNATIONALPATH);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		};
 		try {
-			ListSymboleActionInterational = ServiceDao.fillListActionFromFile("./Symboles_Actions_Internationnales");
+			ListSymboleActionInterational = ServiceDao.fillListActionFromFile(IConstant.ACTIONINTERNATIONALPATH);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

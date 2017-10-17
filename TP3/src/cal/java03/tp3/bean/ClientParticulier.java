@@ -88,6 +88,6 @@ public class ClientParticulier extends Client{
 	public void setCompte(Portefeuille compte) {
 		super.setCompte(compte);
 	}
-
+	
 
 }

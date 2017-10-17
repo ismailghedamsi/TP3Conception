@@ -2,6 +2,7 @@ package cal.java03.tp3.service;
 
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
@@ -80,14 +81,14 @@ public class ServiceDao {
 	
 
 	
+	
 	/**
 	 * Generer un fichier xml avec la librarie Java io 
 	 * @param fileName
 	 * @param client
 	 * @return
 	 */
-	public static boolean saveXml(String fileName, Client client) {
-
+	public static  boolean saveIncident(String fileName, Client client) {
 		try {
 
 			XStream stream = new XStream(new DomDriver());
@@ -96,13 +97,22 @@ public class ServiceDao {
 			if(client instanceof ClientParticulier) {
 				stream.alias("Client", Client.class);
 				stream.alias("ClientParticulier", ClientParticulier.class);
-				stream.omitField(Client.class, "nom");
-				stream.omitField(Client.class, "prenom");
-				stream.omitField(Client.class, "compte");
-				stream.omitField(Client.class, "email");
+				stream.alias("ClientEntreprise", ClientEntreprise.class);
+				stream.omitField(ClientParticulier.class, "nom");
+				stream.omitField(ClientParticulier.class, "prenom");
+				stream.omitField(ClientParticulier.class, "compte");
+				stream.omitField(ClientParticulier.class, "email");
+				stream.omitField(ClientParticulier.class, "idClientParticulier");
+				
+			}else if(client instanceof ClientEntreprise){
+				stream.omitField(ClientEntreprise.class, "cote");
+				stream.omitField(ClientEntreprise.class, "nombreEmploye");
 			}
-		
-			stream.toXML(client, new FileOutputStream(fileName,true));
+			stream.omitField(Client.class, "compte");
+			stream.omitField(Client.class, "etatCompte");
+			stream.omitField(Client.class, "listeAction");
+			stream.omitField(Client.class, "email");
+			stream.toXML(client, new FileOutputStream(fileName));
 
 			return new File(fileName).exists();
 
@@ -112,9 +122,38 @@ public class ServiceDao {
 		return false;
 	}
 	
-
-
+	/**
+	 * Generer le fichier xml des traiments d'un client
+	 * @param client
+	 * @return si le fichier a ete cree
+	 * @throws Exception
+	 */
+	public static boolean saveTraitement(Client client) throws Exception {
+		String pathName;
+		XStream stream = new XStream(new DomDriver());
+		if(client instanceof ClientParticulier) {
+			pathName = "./"+((ClientParticulier) client).getIdClientParticulier()
+					+"-Historiques.xml";
+			stream.toXML(client,new FileOutputStream(new File(pathName)));
+		}else {
+			pathName = "./"+((ClientEntreprise) client).getIdClientEntreprise()
+					+"-Historiques.xml";
+		}
+		return new File(pathName).exists();
 		
-	
+	}
+	/**
+	 * Enregister la liste des actions implique
+	 * @param pathName
+	 * @param totalTransaction
+	 * @return
+	 * @throws Exception
+	 */
+	public static boolean saveListeActionImpliquee(String pathName,Double totalTransaction) throws Exception {
+		XStream stream = new XStream(new DomDriver());
+		stream.toXML(totalTransaction, new FileOutputStream(new File(pathName),true));
+		return new File(pathName).exists();
+	}
+
 	
 }
